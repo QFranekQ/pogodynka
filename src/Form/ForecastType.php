@@ -16,12 +16,9 @@ class ForecastType extends AbstractType
     {
         $builder
             ->add('temperature', NumberType::class, [
-                'attr' => [
-                    'min' => -20,
-                    'max' => 40,
-                ],
-                'html5'=>true,
-                ])
+
+                'html5' => true,
+            ])
             ->add('cloudy', NumberType::class, [
                 'attr' => [
                     'min' => 0,

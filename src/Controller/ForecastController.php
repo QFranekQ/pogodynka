@@ -55,7 +55,10 @@ class ForecastController extends AbstractController
     #[Route('/{id}/edit', name: 'app_forecast_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Forecast $forecast, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(ForecastType::class, $forecast);
+        $form = $this->createForm(ForecastType::class, $forecast, [
+            'validation_groups' => 'edit',
+        ]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Location;
+use App\Service\WeatherUtil;
 use App\Repository\ForecastRepository;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,9 +17,13 @@ class WeatherController extends AbstractController
         #[MapEntity(mapping: ['country'=>'country','city'=>'city'])]
 
         Location $location,
-        ForecastRepository $repository): Response
+//        ForecastRepository $repository
+        WeatherUtil $util,
+    ): Response
+
     {
-        $measurements = $repository->findByLocation($location);
+//        $measurements = $repository->findByLocation($location);
+        $measurements = $util->getWeatherForLocation($location);
 
         return $this->render('weather/city.html.twig', [
             'location' => $location,
